@@ -36,3 +36,27 @@ def read_json_from_file(file_name):
 
     return json.loads(file_contents)
 
+
+
+"""
+Notes:
+
+end of day stock prices will be provided
+we have to report the 2 highest averages
+
+
+v =
+volume for days volume
+c=
+close for days closed
+
+average_price = (V1 ∗ C1 + V2 ∗ C2)/(V1 + V2)
+
+ each month create a tuple with two items
+#append the tuple for each month into a list
+monthly_averages_list = []   <-- I think this is supposed to be a tuple
+
+
+Where is the large json file then???
+
+ """
