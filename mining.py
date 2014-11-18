@@ -18,7 +18,17 @@ stock_data = []
 monthly_averages = []
 
 
+def init():
+    global stock_data
+    stock_data = ""
+
+
 def read_stock_data(stock_name, stock_file_name):
+        global monthly_averages
+        next_monthly_averages == "September"
+
+        if choice
+
     return
 
 
