@@ -41,6 +41,10 @@ def read_stock_data(stock_name, stock_file_name):
                  date_volume = line.get("Volume")
                  date_close = line.get("Close")
 
+                 def date_format (date_string):
+                     now = datetime.datetime.now()
+                     date = datetime.datetime.striptime(date_string, '%Y-%m-%d')
+
 
     except:
         raise FileNotFoundError
