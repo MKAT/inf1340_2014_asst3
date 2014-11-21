@@ -25,7 +25,10 @@ def init():
 
 def read_stock_data(stock_name, stock_file_name):
         global monthly_averages
-        next_monthly_averages == "September"
+        monthly_averages == "September",
+        read_json_from_file('goog.json', 'TSE-SO'):
+            
+
 
         if choice
 
