@@ -54,6 +54,15 @@ def read_stock_data(stock_name, stock_file_name):
 
         #read_json_from_file('goog.json', 'TSE-SO.json'):
 
+    """
+             if "passport" not in traveler.keys() or "first_name" not in traveler.keys() or "last_name" not in traveler.keys() \
+            or "entry_reason" not in traveler.keys() or "birth_date" not in traveler.keys() or "home" not in \
+            traveler.keys()  or "from" not in traveler.keys():
+        return False
+    else:
+        return True
+        """
+
 
 def six_best_months():
     return [('', 0.0), ('', 0.0), ('', 0.0), ('', 0.0), ('', 0.0), ('', 0.0)]
