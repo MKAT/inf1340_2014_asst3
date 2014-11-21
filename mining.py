@@ -41,6 +41,13 @@ def read_stock_data(stock_name, stock_file_name):
                  date_volume = line.get("Volume")
                  date_close = line.get("Close")
 
+                 date_string = datetime.datetime.strptime(date, '%Y-%m-%d')
+                 year_month = str(date_string.year) + '/' + str(date_string.month)
+
+                 date_average = date_volume * date_close
+
+
+
                  def date_format (date_string):
                      now = datetime.datetime.now()
                      date = datetime.datetime.striptime(date_string, '%Y-%m-%d')
