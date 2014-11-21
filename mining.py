@@ -40,7 +40,8 @@ def read_stock_data(stock_name, stock_file_name):
             total_average = {}
             monthly_averages = {}
 
-
+    except FileNotFoundError:
+        return FileNotFoundError
 
     global stock
 
