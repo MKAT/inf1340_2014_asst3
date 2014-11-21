@@ -24,15 +24,31 @@ def init():
 
 
 def read_stock_data(stock_name, stock_file_name):
-        global monthly_averages
-        monthly_averages == "September",
-        read_json_from_file('goog.json', 'TSE-SO'):
-            
+    """
+    Import JSON file and convert into a data structure
+
+    :param stock_name: string
+    :param stock_file_name: JSON file
+    :return: tuple
+    """
+    try:
+        with open(stock_file_name, 'r') as stock_file:
+            stock_contents = json.loads(stock_file)
+            print(stock_contents)
+
+            total_volume = {}
+            total_average = {}
+            monthly_averages = {}
 
 
-        if choice
 
-    return
+    global stock
+
+    next_monthly_averages == "September"
+
+    if choice
+
+
 
 
 def six_best_months():
