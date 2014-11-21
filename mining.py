@@ -40,6 +40,13 @@ def read_stock_data(stock_name, stock_file_name):
             total_average = {}
             monthly_averages = {}
 
+"""
+    def read_stock_data(stock_name, stock_file_name):
+        global monthly_averages
+        def var(monthly_averages):
+                  monthly_averages= "september",
+        read_json_from_file('goog.json', 'TSE-SO.json'):
+"""
 
 
     global stock
