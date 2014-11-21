@@ -33,6 +33,7 @@ def read_stock_data(stock_name, stock_file_name):
     """
     try:
         with open(stock_file_name, 'r') as stock_file:
+            stock_file_name_data = stock_file.read()
             stock_contents = json.loads(stock_file)
             print(stock_contents)
 
@@ -40,10 +41,8 @@ def read_stock_data(stock_name, stock_file_name):
             total_average = {}
             monthly_averages = {}
 
-    except FileNotFoundError:
+    except:
         raise FileNotFoundError
-
-
 
     for line in stock_contents:
         def read_stock_data(stock_name, stock_file_name):
