@@ -44,13 +44,16 @@ def read_stock_data(stock_name, stock_file_name):
         raise FileNotFoundError
 
 
-"""
-    def read_stock_data(stock_name, stock_file_name):
-        global monthly_averages
+
+    for line in stock_contents:
+        def read_stock_data(stock_name, stock_file_name):
+            global monthly_averages
         def var(monthly_averages):
-                  monthly_averages= "september",
-        read_json_from_file('goog.json', 'TSE-SO.json'):
-"""
+                  monthly_averages = "september",
+
+
+        #read_json_from_file('goog.json', 'TSE-SO.json'):
+
 
 
     global stock
