@@ -46,7 +46,7 @@ def read_stock_data(stock_name, stock_file_name):
 
                  date_average = date_volume * date_close
 
-
+#date month and date year -2 paramenters for a function
 
                  def date_format (date_string):
                      now = datetime.datetime.now()
@@ -66,7 +66,7 @@ def read_stock_data(stock_name, stock_file_name):
         #read_json_from_file('goog.json', 'TSE-SO.json'):
 
 
-
+ def date_month_year ([date_year], [date_month]):
 
 def six_best_months():
     return [('', 0.0), ('', 0.0), ('', 0.0), ('', 0.0), ('', 0.0), ('', 0.0)]
