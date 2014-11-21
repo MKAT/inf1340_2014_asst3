@@ -56,8 +56,6 @@ def read_stock_data(stock_name, stock_file_name):
     if choice
 
 
-
-
 def six_best_months():
     return [('', 0.0), ('', 0.0), ('', 0.0), ('', 0.0), ('', 0.0), ('', 0.0)]
 
