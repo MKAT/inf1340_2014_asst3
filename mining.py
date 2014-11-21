@@ -43,6 +43,7 @@ def read_stock_data(stock_name, stock_file_name):
     except FileNotFoundError:
         raise FileNotFoundError
 
+
 """
     def read_stock_data(stock_name, stock_file_name):
         global monthly_averages
