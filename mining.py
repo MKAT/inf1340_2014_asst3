@@ -18,11 +18,6 @@ stock_data = []
 monthly_averages = []
 
 
-def init():
-    global stock_data
-    stock_data = ""
-
-
 def read_stock_data(stock_name, stock_file_name):
     """
     Import JSON file and convert into a data structure
@@ -41,6 +36,12 @@ def read_stock_data(stock_name, stock_file_name):
             total_average = {}
             monthly_averages = {}
 
+            for line in stock_contents:
+                 date = line.get("Date")
+                 date_volume = line.get("Volume")
+                 date_close = line.get("Close")
+
+
     except:
         raise FileNotFoundError
 
@@ -52,14 +53,6 @@ def read_stock_data(stock_name, stock_file_name):
 
 
         #read_json_from_file('goog.json', 'TSE-SO.json'):
-
-
-
-    global stock
-
-    next_monthly_averages == "September"
-
-    if choice
 
 
 def six_best_months():
