@@ -16,9 +16,12 @@ import datetime
 
 stock_data = []
 monthly_averages = []
+year_month_volume = []
+year_month_sales = []
 
 
 def read_stock_data(stock_name, stock_file_name):
+
     """
     Import JSON file and convert into a data structure
 
@@ -26,6 +29,45 @@ def read_stock_data(stock_name, stock_file_name):
     :param stock_file_name: JSON file
     :return: tuple
     """
+
+    # process stock_name
+    stock_records = read_json_from_file(stock_name)
+    for stock_record in stock_records:
+       closing_price = stock_record['Close']
+       day_volume = stock_record['Volume'] # get stock volume
+       day_sales = day_volume * closing_price # get stock closing price
+       year_month = stock_record['Date'][0:4] + '/' + stock_record['Date'][5,7] # convert format from yyyy-mm to yyyy/mm
+       try:
+           if year_month_volume[year_month]:  # check if year and month e.g. 2008/12 already exist in dictionary
+              month_volume = year_month_volume[year_month] + day_volume # add day stock volume into value of year_month
+              year_month_volume[year_month] = month_volume # store/replace value of year_month volume with new year_month volume computed
+              month_sales = year_month_sales[year_month] + day_sales # add the day sales with the year_month sales
+              year_month_sales[year_month] = month_sales # store/replace value of year_month sales with new year_month sales computed
+       except:
+          year_month_volume[year_month] = day_volume # add day_volume on year_month_volume dictionary
+          year_month_sales[year_month] = day_sales # add day_sales on year_month_sales dictionary
+
+    # process stock_file_name  - repeat same process made with stock_name
+    stock_records = read_json_from_file(stock_file_name)
+    for stock_record in stock_records:
+       closing_price = stock_record['Close']
+       day_volume = stock_record['Volume']
+       day_sales = day_volume * closing_price
+       year_month = stock_record['Date'][0:4] + '/' + stock_record['Date'][5,7]
+       try:
+           if year_month_volume[year_month]:
+              month_volume = year_month_volume[year_month] + day_volume
+              year_month_volume[year_month] = month_volume
+              month_sales = year_month_sales[year_month] + day_sales
+              year_month_sales = month_sales
+       except:
+          year_month_volume[year_month] = day_volume
+          year_month_sales[year_month] = day_sales
+
+return
+
+    """
+
     try:
         with open(stock_file_name, 'r') as stock_file:
             stock_file_name_data = stock_file.read()
@@ -67,7 +109,7 @@ def read_stock_data(stock_name, stock_file_name):
 
 
  def date_month_year ([date_year], [date_month]):
-
+    """
 def six_best_months():
     return [('', 0.0), ('', 0.0), ('', 0.0), ('', 0.0), ('', 0.0), ('', 0.0)]
 
