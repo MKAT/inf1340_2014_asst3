@@ -36,6 +36,7 @@ def read_stock_data(stock_name, stock_file_name):
        closing_price = stock_record['Close']
        day_volume = stock_record['Volume'] # get stock volume
        day_sales = day_volume * closing_price # get stock closing price
+       month_sales#Melissa added to refer to green """ as alternate to 3rd if--just uncomment and it will work without red lines
        year_month = stock_record['Date'][0:4] + '/' + stock_record['Date'][5,7] # convert format from yyyy-mm to yyyy/mm
        try:
            if year_month_volume[year_month]:  # check if year and month e.g. 2008/12 already exist in dictionary
@@ -44,26 +45,43 @@ def read_stock_data(stock_name, stock_file_name):
               year_month_volume[year_month] = day_volume # add day stock volume into value of year_month
 
            if year_month_sales[year_month]:  # check if year and month e.g. 2008/12 already exist in dictionary
-              year_month_sales[year_month] = year_month_sales[year_month] + day_volume # add day stock volume into value of year_month
+              year_month_sales[year_month] = year_month_sales[year_month] + day_volume # add day volume into value of year month
            else:
-              year_month_sales[year_month] = day_volume # add day stock volume into value of year_month
-           #insert averages function below to be done within this for loop
-           if year_month_sales[year_month]:  # check if year and month e.g. 2008/12 already exist in dictionary
-              year_month_sales[year_month] = year_month_sales[year_month] + day_volume # add day stock volume into value of year_month
+              year_month_sales[year_month] = day_sales # add day stock volume into value of year_month
+           #the below is to calculate the average price by  (total sales + monthy averages)/volume of sales
+           if monthly_averages[year_month]:  # check if year and month e.g. 2008/12 already exist in dictionary
+              monthly_averages[year_month] = (year_month_sales[year_month] + [monthly_averages]) / year_month_volume[year_month]
            else:
-              year_month_sales[year_month] = day_volume # add day stock volume into value of year_month
-                    #make the updat the year month sales within the try--needs another if loop
-                    # use sales this time
+               monthly_averages[year_month] = monthly_averages # add day stock volume into value of year_month
+
+            except:
+           FileNotFoundError
+           year_month_volume[year_month] = day_volume # add day_volume on year_month_volume dictionary
+            year_month_sales[year_month] = day_sales
+            if month_sales:
+                month_sales = monthly_averages[year_month] + day_sales
+
+              """ the except option is giving big issues -- help please """
+
+           #this is the for loop for listing the monthly averages values--not sure if i understand this
+    for monthly_averages in year_month:
+        year = stock_record['Date'][0:4]
+        monthly_averages = monthly_averages[year_month] + year
+        month_rank = ord(monthly_averages)[year]
+       try:
+            monthly_averages:
+            monthly_total[year_month] = (year_month_sales[year_month] + [monthly_averages]) / year_month_volume[year_month]
+
+
+
     """
               year_month_volume[year_month] = month_volume # store/replace value of year_month volume with new year_month volume computed
               year_month_sales = [day_sales * month_volume] * 12  #Melissa's attempt at a fix
               month_sales = year_month_sales[year_month] + day_sales # add the day sales with the year_month sales
               year_month_sales[year_month] = month_sales # store/replace value of year_month sales with new year_month sales computed
     """
-       except:
-          year_month_volume[year_month] = day_volume # add day_volume on year_month_volume dictionary
-          year_month_sales[year_month] = day_sales # add day_sales on year_month_sales dictionary
 
+"""
     # process stock_file_name  - repeat same process made with stock_name
     stock_records = read_json_from_file(stock_file_name)
     for stock_record in stock_records:
@@ -103,7 +121,7 @@ def read_stock_data(stock_name, stock_file_name):
                  date_average = date_volume * date_close
 
 
-"""
+
 
 #date month and date year -2 paramenters for a function
 
@@ -167,3 +185,6 @@ monthly_averages_list = []   <-- I think this is supposed to be a tuple
 Where is the large json file then???
 
  """
+#extra notes
+#make the update the year month sales within the try--needs another if loop
+                    # use sales this time
