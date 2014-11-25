@@ -41,6 +41,7 @@ def read_stock_data(stock_name, stock_file_name):
            if year_month_volume[year_month]:  # check if year and month e.g. 2008/12 already exist in dictionary
               month_volume = year_month_volume[year_month] + day_volume # add day stock volume into value of year_month
               year_month_volume[year_month] = month_volume # store/replace value of year_month volume with new year_month volume computed
+              #year_month_sales = [day_sales * month_volume] * 12  #Melissa's attempt at a fix
               month_sales = year_month_sales[year_month] + day_sales # add the day sales with the year_month sales
               year_month_sales[year_month] = month_sales # store/replace value of year_month sales with new year_month sales computed
        except:
@@ -66,7 +67,7 @@ def read_stock_data(stock_name, stock_file_name):
 
 return
 
-    """
+"""
 
     try:
         with open(stock_file_name, 'r') as stock_file:
@@ -109,7 +110,9 @@ return
 
 
  def date_month_year ([date_year], [date_month]):
-    """
+"""
+
+
 def six_best_months():
     return [('', 0.0), ('', 0.0), ('', 0.0), ('', 0.0), ('', 0.0), ('', 0.0)]
 
