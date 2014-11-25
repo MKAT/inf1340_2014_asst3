@@ -39,11 +39,27 @@ def read_stock_data(stock_name, stock_file_name):
        year_month = stock_record['Date'][0:4] + '/' + stock_record['Date'][5,7] # convert format from yyyy-mm to yyyy/mm
        try:
            if year_month_volume[year_month]:  # check if year and month e.g. 2008/12 already exist in dictionary
-              month_volume = year_month_volume[year_month] + day_volume # add day stock volume into value of year_month
+              year_month_volume[year_month] = year_month_volume[year_month] + day_volume # add day stock volume into value of year_month
+           else:
+              year_month_volume[year_month] = day_volume # add day stock volume into value of year_month
+
+           if year_month_sales[year_month]:  # check if year and month e.g. 2008/12 already exist in dictionary
+              year_month_sales[year_month] = year_month_sales[year_month] + day_volume # add day stock volume into value of year_month
+           else:
+              year_month_sales[year_month] = day_volume # add day stock volume into value of year_month
+           #insert averages function below to be done within this for loop
+           if year_month_sales[year_month]:  # check if year and month e.g. 2008/12 already exist in dictionary
+              year_month_sales[year_month] = year_month_sales[year_month] + day_volume # add day stock volume into value of year_month
+           else:
+              year_month_sales[year_month] = day_volume # add day stock volume into value of year_month
+                    #make the updat the year month sales within the try--needs another if loop
+                    # use sales this time
+    """
               year_month_volume[year_month] = month_volume # store/replace value of year_month volume with new year_month volume computed
-              #year_month_sales = [day_sales * month_volume] * 12  #Melissa's attempt at a fix
+              year_month_sales = [day_sales * month_volume] * 12  #Melissa's attempt at a fix
               month_sales = year_month_sales[year_month] + day_sales # add the day sales with the year_month sales
               year_month_sales[year_month] = month_sales # store/replace value of year_month sales with new year_month sales computed
+    """
        except:
           year_month_volume[year_month] = day_volume # add day_volume on year_month_volume dictionary
           year_month_sales[year_month] = day_sales # add day_sales on year_month_sales dictionary
@@ -65,9 +81,6 @@ def read_stock_data(stock_name, stock_file_name):
           year_month_volume[year_month] = day_volume
           year_month_sales[year_month] = day_sales
 
-return
-
-"""
 
     try:
         with open(stock_file_name, 'r') as stock_file:
@@ -88,6 +101,9 @@ return
                  year_month = str(date_string.year) + '/' + str(date_string.month)
 
                  date_average = date_volume * date_close
+
+
+"""
 
 #date month and date year -2 paramenters for a function
 
