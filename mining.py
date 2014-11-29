@@ -57,22 +57,33 @@ def average_price(vc_list):
 
     return (numerator / denominator)
 
+
 """
-
-
-
 TO DO
 iterate through stock records(take a for loop)
 google dictionary.items
-inside for loop compute tea average price and call the average price function
+inside for loop compute the average price and call the average price function
 store that in a new list
 find a way to sort the list--make the list look like [('2013/09', 33.2), ('2001/12', 3.2)]
-inorder or you to index the 1st 6
-list slicing.
-
-make a
+in order for you to index the 1st 6
+list slicing used to ge the first 6 and the last 6--in written notes
 
 """
+
+#Melissa's attempt at the 'Compare 2 Stocks' Bonus
+vc_list = [] #input our tuple to call from-- chose vc_list because it is what we used to compute the averages
+
+
+def average_price(vc_list):
+    return sum (vc_list) * 1.0 / len(vc_list)
+avg = average_price(vc_list)
+variance = map (lambda x: (x-avg)**2, vc_list)
+
+average (variance)
+import math
+standard_deviation = math.sqrt(average(variance))
+
+
 
 
 
