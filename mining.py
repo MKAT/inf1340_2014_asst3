@@ -34,30 +34,41 @@ def read_stock_data(stock_name, stock_file_name):
     global monthly_averages
     stock_records = read_json_from_file(stock_file_name)
     for stock_record in stock_records:
+        # get stock closing price
         closing_price = stock_record['Close']
-        day_volume = stock_record['Volume'] # get stock volume
-        day_sales = day_volume * closing_price # get stock closing price
+        # get stock volume
+        day_volume = stock_record['Volume']
+        day_sales = day_volume * closing_price
         month_sales#Melissa added to refer to green """ as alternate to 3rd if--just uncomment and it will work without red lines
-        year_month = stock_record['Date'][0:4] + '/' + stock_record['Date'][5,7] # convert format from yyyy-mm to yyyy/mm
+        # convert format from yyyy-mm to yyyy/mm
+        year_month = stock_record['Date'][0:4] + '/' + stock_record['Date'][5,7]
         try:
-            if y_month_volume[year_month]:  # check if year and month e.g. 2008/12 already exist in dictionary
-                y_month_volume[year_month] = y_month_volume[year_month] + day_volume # add day stock volume into value of year_month
+            # check if year and month e.g. 2008/12 already exist in dictionary
+            if y_month_volume[year_month]:
+                # add day stock volume into value of year_month
+                y_month_volume[year_month] = y_month_volume[year_month] + day_volume
             else:
-                y_month_volume[year_month] = day_volume # add day stock volume into value of year_month
-            if y_month_sales[year_month]:  # check if year and month e.g. 2008/12 already exist in dictionary
-                y_month_sales[year_month] = y_month_sales[year_month] + day_volume # add day volume into value of year month
+                # add day stock volume into value of year_month
+                y_month_volume[year_month] = day_volume
+            # check if year and month e.g. 2008/12 already exist in dictionary
+            if y_month_sales[year_month]:
+                # add day volume into value of year month
+                y_month_sales[year_month] = y_month_sales[year_month] + day_volume
             else:
-                y_month_sales[year_month] = day_sales # add day stock volume into value of year_month
+                # add day stock volume into value of year_month
+                y_month_sales[year_month] = day_sales
             # the below is to calculate the average price by  (total sales + monthy averages)/volume of sales
-            if monthly_averages[year_month]:  # check if year and month e.g. 2008/12 already exist in dictionary
+            # check if year and month e.g. 2008/12 already exist in dictionary
+            if monthly_averages[year_month]:
                 monthly_averages[year_month]=(y_month_sales[year_month]+[monthly_averages])/y_month_volume[year_month]
             else:
-                monthly_averages[year_month] = monthly_averages # add day stock volume into value of year_month
+                # add day stock volume into value of year_month
+                monthly_averages[year_month] = monthly_averages
 
         except:
            raise FileNotFoundError
-
-        y_month_volume[year_month] = day_volume # add day_volume on y_month_volume dictionary
+        # add day_volume on y_month_volume dictionary
+        y_month_volume[year_month] = day_volume
         y_month_sales[year_month] = day_sales
         if month_sales:
             month_sales = monthly_averages[year_month] + day_sales
