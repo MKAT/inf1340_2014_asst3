@@ -17,7 +17,7 @@ import datetime
 stock_data = []
 monthly_averages = []
 year_month_volume = []
-year_month_sales = []
+year_month_sales = {}
 
 
 def read_stock_data(stock_name, stock_file_name):
@@ -31,120 +31,49 @@ def read_stock_data(stock_name, stock_file_name):
     """
 
     # process stock_name
-    stock_records = read_json_from_file(stock_name)
-    for stock_record in stock_records:
-       closing_price = stock_record['Close']
-       day_volume = stock_record['Volume'] # get stock volume
-       day_sales = day_volume * closing_price # get stock closing price
-       month_sales#Melissa added to refer to green """ as alternate to 3rd if--just uncomment and it will work without red lines
-       year_month = stock_record['Date'][0:4] + '/' + stock_record['Date'][5,7] # convert format from yyyy-mm to yyyy/mm
-       try:
-           if year_month_volume[year_month]:  # check if year and month e.g. 2008/12 already exist in dictionary
-              year_month_volume[year_month] = year_month_volume[year_month] + day_volume # add day stock volume into value of year_month
-           else:
-              year_month_volume[year_month] = day_volume # add day stock volume into value of year_month
-
-           if year_month_sales[year_month]:  # check if year and month e.g. 2008/12 already exist in dictionary
-              year_month_sales[year_month] = year_month_sales[year_month] + day_volume # add day volume into value of year month
-           else:
-              year_month_sales[year_month] = day_sales # add day stock volume into value of year_month
-           #the below is to calculate the average price by  (total sales + monthy averages)/volume of sales
-           if monthly_averages[year_month]:  # check if year and month e.g. 2008/12 already exist in dictionary
-              monthly_averages[year_month] = (year_month_sales[year_month] + [monthly_averages]) / year_month_volume[year_month]
-           else:
-               monthly_averages[year_month] = monthly_averages # add day stock volume into value of year_month
-
-            except:
-           FileNotFoundError
-           year_month_volume[year_month] = day_volume # add day_volume on year_month_volume dictionary
-            year_month_sales[year_month] = day_sales
-            if month_sales:
-                month_sales = monthly_averages[year_month] + day_sales
-
-              """ the except option is giving big issues -- help please """
-
-           #this is the for loop for listing the monthly averages values--not sure if i understand this
-    for monthly_averages in year_month:
-        year = stock_record['Date'][0:4]
-        monthly_averages = monthly_averages[year_month] + year
-        month_rank = ord(monthly_averages)[year]
-       try:
-            monthly_averages:
-            monthly_total[year_month] = (year_month_sales[year_month] + [monthly_averages]) / year_month_volume[year_month]
-
-
-
-    """
-              year_month_volume[year_month] = month_volume # store/replace value of year_month volume with new year_month volume computed
-              year_month_sales = [day_sales * month_volume] * 12  #Melissa's attempt at a fix
-              month_sales = year_month_sales[year_month] + day_sales # add the day sales with the year_month sales
-              year_month_sales[year_month] = month_sales # store/replace value of year_month sales with new year_month sales computed
-    """
-
-"""
-    # process stock_file_name  - repeat same process made with stock_name
-    stock_records = read_json_from_file(stock_file_name)
-    for stock_record in stock_records:
-       closing_price = stock_record['Close']
-       day_volume = stock_record['Volume']
-       day_sales = day_volume * closing_price
-       year_month = stock_record['Date'][0:4] + '/' + stock_record['Date'][5,7]
-       try:
-           if year_month_volume[year_month]:
-              month_volume = year_month_volume[year_month] + day_volume
-              year_month_volume[year_month] = month_volume
-              month_sales = year_month_sales[year_month] + day_sales
-              year_month_sales = month_sales
-       except:
-          year_month_volume[year_month] = day_volume
-          year_month_sales[year_month] = day_sales
-
-
     try:
-        with open(stock_file_name, 'r') as stock_file:
-            stock_file_name_data = stock_file.read()
-            stock_contents = json.loads(stock_file)
-            print(stock_contents)
+        stock_records = read_json_from_file(stock_file_name)
+    except FileNotFoundError:
+        pass
 
-            total_volume = {}
-            total_average = {}
-            monthly_averages = {}
+    for stock_record in stock_records:
+       c = stock_record['Close']
+       v = stock_record['Volume'] # get stock volume
+       # #day_sales = day_volume * closing_price # get stock closing price
+       # #month_sales#Melissa added to refer to green """ as alternate to 3rd if--just uncomment and it will work without red lines
+       year_month = stock_record['Date'][0:4] + '/' + stock_record['Date'][5,7] # convert format from yyyy-mm to yyyy/mm
 
-            for line in stock_contents:
-                 date = line.get("Date", (["", "", ""]))
-                 date_volume = line.get("Volume")
-                 date_close = line.get("Close")
+       if year_month in year_month_sales:
+           year_month_sales[year_month].append((v, c))
+       else:
+           year_month_sales[year_month] = [(v, c)]
 
-                 date_string = datetime.datetime.strptime(date, '%Y-%m-%d')
-                 year_month = str(date_string.year) + '/' + str(date_string.month)
+def average_price(vc_list):
+    numerator = 0
+    denominator = 0
+    for v,c in vc_list:
+        numerator += (v * c) # numerator = numerator + (v*c)
+        denominator += v
 
-                 date_average = date_volume * date_close
+    return (numerator / denominator)
 
-
-
-
-#date month and date year -2 paramenters for a function
-
-                 def date_format (date_string):
-                     now = datetime.datetime.now()
-                     date = datetime.datetime.striptime(date_string, '%Y-%m-%d')
-
-
-    except:
-        raise FileNotFoundError
-
-    for line in stock_contents:
-        def read_stock_data(stock_name, stock_file_name):
-            global monthly_averages
-        def var(monthly_averages):
-                  monthly_averages = "september",
-
-
-        #read_json_from_file('goog.json', 'TSE-SO.json'):
-
-
- def date_month_year ([date_year], [date_month]):
 """
+
+
+
+TO DO
+iterate through stock records(take a for loop)
+google dictionary.items
+inside for loop compute tea average price and call the average price function
+store that in a new list
+find a way to sort the list--make the list look like [('2013/09', 33.2), ('2001/12', 3.2)]
+inorder or you to index the 1st 6
+list slicing.
+
+make a
+
+"""
+
 
 
 def six_best_months():
