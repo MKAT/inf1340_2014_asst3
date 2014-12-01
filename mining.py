@@ -48,7 +48,6 @@ def read_stock_data(stock_name, stock_file_name):
         average_sales = average_price(year_month_item)
         year_month_average_sales[ym] = average_sales
 
- 
 def average_price(vc_list):
     numerator = 0
     denominator = 0
