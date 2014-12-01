@@ -34,14 +34,14 @@ def read_stock_data(stock_name, stock_file_name):
         pass
 
     for stock_record in stock_records:
-       c = stock_record['Close']
-       v = stock_record['Volume']
-       year_month = stock_record['Date'][0:4] + '/' + stock_record['Date'][5:7]
+        c = stock_record['Close']
+        v = stock_record['Volume']
+        year_month = stock_record['Date'][0:4] + '/' + stock_record['Date'][5:7]
 
-       if year_month in year_month_sales:
-           year_month_sales[year_month].append((v, c))
-       else:
-           year_month_sales[year_month] = [(v, c)]
+        if year_month in year_month_sales:
+            year_month_sales[year_month].append((v, c))
+        else:
+            year_month_sales[year_month] = [(v, c)]
 
     year_month_average_sales = {}
     for ym, year_month_item in year_month_sales.items():
@@ -51,17 +51,17 @@ def read_stock_data(stock_name, stock_file_name):
 def average_price(vc_list):
     numerator = 0
     denominator = 0
-    for v,c in vc_list:
+    for v, c in vc_list:
         numerator += (v * c)
         denominator += v
 
-    return (numerator / denominator)
+    return numerator / denominator
 
 
 def six_best_months(year_month_average_sales):
     sales_value = {}
-    for yrmo, sales in year_month_average_sales.items():
-        sales_value[format(sales)] = yrmo
+    for year_and_month, sales in year_month_average_sales.items():
+        sales_value[format(sales)] = year_and_month
 
     sorted_sales_value = []
     for sorted_sales in sorted(year_month_average_sales.values()):
@@ -71,9 +71,9 @@ def six_best_months(year_month_average_sales):
     count_six = 0
     for highest_sales in reversed(sorted_sales_value):
         if count_six < 6:
-            yearmonth = sales_value[format(highest_sales)]
-            six_best_month_sales[yearmonth] = highest_sales
-            count_six = count_six + 1
+            year_plus_month = sales_value[format(highest_sales)]
+            six_best_month_sales[year_plus_month] = highest_sales
+            count_six += count_six
         else:
             break
     return list(six_best_month_sales.items())
@@ -81,17 +81,17 @@ def six_best_months(year_month_average_sales):
 
 def six_worst_months(year_month_average_sales):
     sales_value = {}
-    for yrmo, sales in year_month_average_sales.items():
-        sales_value[format(sales)] = yrmo
+    for year_and_month, sales in year_month_average_sales.items():
+        sales_value[format(sales)] = year_and_month
 
     six_worst_month_sales = {}
     count_six = 0
     sorted_sales_value = []
     for sorted_sales_value in sorted(year_month_average_sales.values()):
         if count_six < 6:
-            yearmonth = sales_value[format(sorted_sales_value)]
-            six_worst_month_sales[yearmonth] = sorted_sales_value
-            count_six = count_six + 1
+            year_plus_month = sales_value[format(sorted_sales_value)]
+            six_worst_month_sales[year_plus_month] = sorted_sales_value
+            count_six += count_six
         else:
             break
     return list(six_worst_month_sales.items())
