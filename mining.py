@@ -11,9 +11,9 @@ import datetime
 import math
 from operator import itemgetter
 
-stock_data = []
-monthly_averages = []
-year_month_volume = []
+stock_data = {}
+monthly_averages = {}
+year_month_volume = {}
 year_month_sales = {}
 
 
@@ -36,7 +36,7 @@ def read_stock_data(stock_name, stock_file_name):
     for stock_record in stock_records:
        c = stock_record['Close']
        v = stock_record['Volume']
-       year_month = stock_record['Date'][0:4] + '/' + stock_record['Date'][5,7]
+       year_month = stock_record['Date'][0:4] + '/' + stock_record['Date'][5:7]
 
        if year_month in year_month_sales:
            year_month_sales[year_month].append((v, c))
