@@ -22,13 +22,25 @@ year_month_volume = []
 year_month_sales = []
 
 
+def read_json_from_file(file_name):
+    try:
+        with open(file_name) as file_handle:
+            file_contents = file_handle.read()
+    except FileNotFoundError:
+        raise FileNotFoundError("File cannot be found.")
+    except ValueError:
+        raise ValueError("Incorrect file format.")
+
+    return json.loads(file_contents)
+
+
 def read_stock_data(stock_name, stock_file_name):
 
     """
     Import JSON file and convert into a data structure
 
-    :param stock_name: string
-    :param stock_file_name: JSON file
+    :param stock_name: JSON file
+    :param stock_file_name: JSON file name
     :return: tuple
     """
 
@@ -40,7 +52,7 @@ def read_stock_data(stock_name, stock_file_name):
         v = stock_record['Volume']
         sales = v * c
         # convert date format from yyyy-mm to yyyy/mm
-        year_month = stock_record['Date'][0:4] + '/' + stock_record['Date'][5,7]
+        year_month = stock_record['Date'][0:4] + '/' + stock_record['Date'][5, 7]
         volume_tuple = (year_month, v)
         sales_tuple = (year_month, sales)
 
@@ -53,17 +65,24 @@ def read_stock_data(stock_name, stock_file_name):
         else:
             year_month_sales[year_month] = sales_tuple
 
-        # for month, volume in year_month_volume:
-        #     monthly_averages[month] += volume
-        # for month, sales in year_month_sales:
-        #     monthly_averages[month] += sales
-        # for month, averages in monthly_averages.items():
-        #     monthly_averages[month] = float("{0:.2f}".format(year_month_sales[month])/monthly_averages[month])
-        # results = monthly_averages.items()
-        # return sorted(results, key=itemgetter(1))
+    for month, volume in year_month_volume:
+        monthly_averages[month] += volume
+    for month, sales in year_month_sales:
+        monthly_averages[month] += sales
+    for month, averages in monthly_averages.items():
+        monthly_averages[month] = float("{0:.2f}".format(year_month_sales[month])/monthly_averages[month])
+    results = monthly_averages.items()
+    return sorted(results, key=itemgetter(1))
 
 
+def six_best_months(results):
+    best_six_results = sorted(results, key=itemgetter(1), reverse=True)
+    return best_six_results
 
+
+def six_worst_months(results):
+    worst_six_results = sorted(results, key=itemgetter(1))
+    return worst_six_results
 
 def average_price(vc_list):
     numerator = 0
@@ -101,26 +120,6 @@ vc_list = [] #input our tuple to call from-- chose vc_list because it is what we
 
 
 
-
-
-def six_best_months():
-    return [('', 0.0), ('', 0.0), ('', 0.0), ('', 0.0), ('', 0.0), ('', 0.0)]
-
-
-def six_worst_months():
-    return [('', 0.0), ('', 0.0), ('', 0.0), ('', 0.0), ('', 0.0), ('', 0.0)]
-
-
-def read_json_from_file(file_name):
-    try:
-        with open(file_name) as file_handle:
-            file_contents = file_handle.read()
-    except FileNotFoundError:
-        raise FileNotFoundError("File cannot be found.")
-    except ValueError:
-        raise ValueError("Incorrect file format.")
-
-    return json.loads(file_contents)
 
 
 

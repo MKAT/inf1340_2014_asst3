@@ -20,4 +20,7 @@ def test_goog():
                                  ('2008/05', 576.29), ('2008/06', 555.34)]
     assert six_worst_months() == [('2004/09', 116.38), ('2004/10', 164.52), ('2004/11', 177.09), ('2004/12', 181.01),
                                   ('2005/03', 181.18), ('2005/01', 192.96)]
+    read_stock_data("TSE-SO", "data/TSE-SO.json")
+    assert six_best_months()
+    assert six_worst_months()
 
