@@ -85,7 +85,7 @@ def six_best_months():
     return list(six_best_month_sales.items()) # return the list of six highest sales computed
 
 
-def six_worst_months(year_month_average_sales):
+def six_worst_months():
     sales_value = {}
     for yrmo, sales in year_month_average_sales.items():
         sales_value[format(sales)] = yrmo
