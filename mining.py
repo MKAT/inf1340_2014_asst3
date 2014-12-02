@@ -45,8 +45,7 @@ def read_stock_data(stock_name, stock_file_name):
 
     for ym, year_month_item in year_month_sales.items():
         average_sales = average_price(year_month_item)
-        year_month_average_sales[ym] = average_sales
-    return year_month_average_sales
+        year_month_average_sales[ym] = round(average_sales, 2)
 
 def average_price(vc_list):
     numerator = 0
@@ -58,7 +57,8 @@ def average_price(vc_list):
     return numerator / denominator
 
 
-def six_best_months(year_month_average_sales):
+def six_best_months():
+    global year_month_average_sales
     sales_value = {}
     # get the year/month and its accumulate average sales from the year_month_average_sales dictionary
     for year_and_month, sales in year_month_average_sales.items():
@@ -77,7 +77,7 @@ def six_best_months(year_month_average_sales):
     for highest_sales in reversed(sorted_sales_value):
         # get the first 6 records which is equivalent to first 6 months from highest to lowest
         if count_six < 6:
-            year_plus_month = sales_value[format(highest_sales, '.2f')]
+            year_plus_month = sales_value[format(highest_sales)]
             six_best_month_sales[year_plus_month] = highest_sales
             count_six += count_six
         else:
@@ -97,7 +97,7 @@ def six_worst_months(year_month_average_sales):
     # this sorted already arranged the average sales from lowest to highest, so just get the first 6 months
     for sorted_sales_value in sorted(year_month_average_sales.values()):
         if count_six < 6:
-            yearmonth = sales_value[format(sorted_sales_value, '.2f')]
+            yearmonth = sales_value[format(sorted_sales_value)]
             six_worst_month_sales[yearmonth] = sorted_sales_value
             count_six += count_six
         else:
@@ -110,15 +110,3 @@ def read_json_from_file(file_name):
         file_contents = file_handle.read()
 
     return json.loads(file_contents)
-
-#Melissa's attempt at the 'Compare 2 Stocks' Bonus
-vc_list = [] #input our tuple to call from-- chose vc_list because it is what we used to compute the averages
-
-
-# def average_price(vc_list):
-#     return sum(vc_list) * 1.0 / len(vc_list)
-# avg = average_price(vc_list)
-# variance = map(lambda x: (x-avg)**2, vc_list)
-#
-# average(variance)
-# standard_deviation = math.sqrt(average(variance))
