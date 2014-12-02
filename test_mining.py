@@ -2,13 +2,8 @@
 
 """ Docstring """
 
-__author__ = 'Susan Sim'
-__email__ = "ses@drsusansim.org"
-
-__copyright__ = "2014 Susan Sim"
-__license__ = "MIT License"
-
-__status__ = "Prototype"
+__author__ = 'Laurel Robinson, Melissa Tomko, Anne Simon'
+__email__ = "laurel.robinson@mail.utoronto.ca, melissa.tomko@mail.utoronto.ca, anne.simon@mail.utoronto.ca"
 
 # imports one per line
 from mining import *
