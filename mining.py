@@ -15,14 +15,14 @@ stock_data = {}
 monthly_averages = {}
 year_month_volume = {}
 year_month_sales = {}
+year_month_average_sales = {}
 
 
-def read_stock_data(stock_name, stock_file_name):
+def read_stock_data(stock_file_name):
 
     """
     Import JSON file and convert into a data structure
 
-    :param stock_name: string
     :param stock_file_name: JSON file
     :return: tuple
     """
@@ -41,10 +41,10 @@ def read_stock_data(stock_name, stock_file_name):
         else:
             year_month_sales[year_month] = [(v, c)]
 
-    year_month_average_sales = {}
     for ym, year_month_item in year_month_sales.items():
         average_sales = average_price(year_month_item)
         year_month_average_sales[ym] = average_sales
+    return year_month_average_sales
 
 #calculating average price
 def average_price(vc_list):
