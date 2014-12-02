@@ -26,8 +26,6 @@ def read_stock_data(stock_name, stock_file_name):
     :param stock_file_name: JSON file
     :return: tuple
     """
-
-    # process stock_name
     try:
         stock_records = read_json_from_file(stock_file_name)
     except FileNotFoundError:
@@ -36,7 +34,7 @@ def read_stock_data(stock_name, stock_file_name):
     for stock_record in stock_records:
         c = stock_record['Close']
         v = stock_record['Volume']
-        year_month = stock_record['Date'][0:4] + '/' + stock_record['Date'][5:7]
+        year_month = stock_record['Date'][0:4] + '/' + stock_record['Date'][5:7] # turn the date format to year/month
 
         if year_month in year_month_sales:
             year_month_sales[year_month].append((v, c))
